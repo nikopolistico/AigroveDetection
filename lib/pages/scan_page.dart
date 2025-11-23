@@ -231,12 +231,13 @@ class _ScanPageState extends State<ScanPage> {
         final predictionService = context.read<PredictionService>();
         final tags = await predictionService.getTags(processedFile);
 
-        // Check top tags for keywords
+        // Check top tags for keywords (include fruit)
         final bool hasPlantLikeTag = tags.any((t) {
           final tag = (t['tag'] as String?) ?? '';
           return tag.contains('tree') ||
               tag.contains('leaf') ||
-              tag.contains('flower');
+              tag.contains('flower') ||
+              tag.contains('fruit');
         });
 
         if (!hasPlantLikeTag) {
